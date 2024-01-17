@@ -1,0 +1,31 @@
+{
+	"schemaVersion": 1,
+	"id": "custommodifiers",
+	"version": "${version}",
+	"name": "customModifiers",
+	"description": "This is an example description! Tell everyone what your mod is about!",
+	"authors": [
+		"Me!"
+	],
+	"contact": {
+		"homepage": "https://fabricmc.net/",
+		"sources": "https://github.com/FabricMC/fabric-example-mod"
+	},
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"hu.epikzsolthun.ElytraSpeedMod"
+		]
+	},
+	"mixins": [],
+	"depends": {
+		"fabricloader": ">=0.14.21",
+		"minecraft": "~1.20.1",
+		"java": ">=17",
+		"fabric-api": "*",
+		"fabric-key-binding-api-v1": "*"
+	},
+	"suggests": {
+		"another-mod": "*"
+	}
+}
