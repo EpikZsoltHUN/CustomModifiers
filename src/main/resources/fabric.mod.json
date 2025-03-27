@@ -3,9 +3,9 @@
 	"id": "custommodifiers",
 	"version": "${version}",
 	"name": "customModifiers",
-	"description": "This is an example description! Tell everyone what your mod is about!",
+	"description": "A 'modifier' mod from EpikZsoltHUN",
 	"authors": [
-		"Me!"
+		"EpikZsoltHUN"
 	],
 	"contact": {
 		"homepage": "https://fabricmc.net/",
@@ -14,18 +14,17 @@
 	"environment": "*",
 	"entrypoints": {
 		"main": [
-			"hu.epikzsolthun.ElytraSpeedMod"
+			"hu.epikzsolthun.CustomModifiers"
 		]
 	},
-	"mixins": [],
+	"mixins": [
+		"custommodifiers.mixins.json"
+	],
 	"depends": {
-		"fabricloader": ">=0.14.21",
-		"minecraft": "~1.20.1",
-		"java": ">=17",
+		"fabricloader": ">=0.16.10",
+		"minecraft": "~1.21.4",
+		"java": ">=21",
 		"fabric-api": "*",
 		"fabric-key-binding-api-v1": "*"
-	},
-	"suggests": {
-		"another-mod": "*"
 	}
 }
