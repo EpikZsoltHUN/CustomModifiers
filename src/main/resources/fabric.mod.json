@@ -8,14 +8,15 @@
 		"EpikZsoltHUN"
 	],
 	"contact": {
-		"homepage": "https://fabricmc.net/",
-		"sources": "https://github.com/FabricMC/fabric-example-mod"
+		"homepage": "https://github.com/apple745/CustomModifiers",
+		"issues": "https://github.com/apple745/CustomModifiers/issues"
 	},
 	"environment": "*",
 	"entrypoints": {
-		"main": [
+		"client": [
 			"hu.epikzsolthun.CustomModifiers"
-		]
+		],
+		"modmenu": [ "hu.epikzsolthun.ModmenuApiImpl" ]
 	},
 	"mixins": [
 		"custommodifiers.mixins.json"

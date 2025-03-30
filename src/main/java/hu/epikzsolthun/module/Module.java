@@ -1,8 +1,7 @@
 package hu.epikzsolthun.module;
 
-import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
+import hu.epikzsolthun.ModConfig;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
-import net.fabricmc.fabric.api.client.rendering.v1.LayeredDrawerWrapper;
 import net.fabricmc.fabric.api.client.rendering.v1.WorldRenderContext;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.option.KeyBinding;
@@ -15,13 +14,22 @@ public abstract class Module {
     public boolean status;
     public String name;
     public Item icon;
+    public ModConfig config;
     public void tick() {}
     public void Worldrender(WorldRenderContext context) {}
     public void HUDrender(DrawContext context, RenderTickCounter tickCounter) {}
+    public void onEnable(){}
+    public void onDisable(){}
+
+    /**
+     *  Use if you have variables that need to be updated based on config.
+     *  <p>
+     *  The config variable is updated by ModuleManager.
+     */
+    public void UpdateConfig(){}
     /**
     * @param keycode the GLFW keycode for toggling it.
-    * @param id the identifier only using: lowercase, number, - or _
-    *
+    * @param id the identifier only using: lowercase, number and _
     * */
     public Module(int keycode, String id, Item itemIcon){
         togglebinding = KeyBindingHelper.registerKeyBinding(new KeyBinding(

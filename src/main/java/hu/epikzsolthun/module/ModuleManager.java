@@ -1,8 +1,10 @@
 package hu.epikzsolthun.module;
 
 import hu.epikzsolthun.CustomModifiers;
+import hu.epikzsolthun.ModConfig;
 import hu.epikzsolthun.module.mods.Breachswap;
-import hu.epikzsolthun.module.mods.ElytraSpeed;
+import hu.epikzsolthun.module.mods.ElytraFly;
+import me.shedaniel.autoconfig.AutoConfig;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.rendering.v1.*;
 import net.minecraft.client.MinecraftClient;
@@ -19,31 +21,33 @@ public class ModuleManager {
 
     public ModuleManager() {
         modules = new Module[]{
-                new ElytraSpeed(),
+                new ElytraFly(),
                 new Breachswap()
         };
         ClientTickEvents.END_CLIENT_TICK.register(this::tick);
-        WorldRenderEvents.END.register(this::Worldrender);
+        WorldRenderEvents.LAST.register(this::Worldrender);
         HudLayerRegistrationCallback.EVENT.register(layeredDrawer -> layeredDrawer.attachLayerBefore(IdentifiedLayer.DEBUG, MODULE_LIST, this::HUDrender));
     }
-    public ClientTickEvents.EndTick tick(MinecraftClient client){
+    public void tick(MinecraftClient client){
         for (Module m : modules) {
             if(m.togglebinding.wasPressed()){
-                m.status = !m.status;
+                if(!m.status){
+                    EnableModule(m);
+                }else{
+                    DisableModule(m);
+                }
             }
             if(m.status && MinecraftClient.getInstance().world != null){
                 m.tick();
             }
         }
-        return null;
     }
-    public WorldRenderEvents.End Worldrender(WorldRenderContext context){
+    public void Worldrender(WorldRenderContext context){
         for (Module m : modules) {
             if(m.status && MinecraftClient.getInstance().world != null){
                 m.Worldrender(context);
             }
         }
-        return null;
     }
     public void HUDrender(DrawContext context, RenderTickCounter tickCounter){
         for (Module m : modules) {
@@ -54,6 +58,44 @@ public class ModuleManager {
             }
         }
         iconCounter = 0;
+    }
+    public void UpdateConfig(){
+        for (Module m : modules) {
+            m.UpdateConfig();
+        }
+    }
+
+    /**
+     * @return TRUE if it turned on, FALSE if it didn't (it was already on)
+     */
+    public boolean EnableModule(Module m){
+        if(m.status){ return false; }
+        m.status = true;
+        m.config = AutoConfig.getConfigHolder(ModConfig.class).getConfig();
+        m.UpdateConfig();
+        m.onEnable();
+        return true;
+    }
+    /**
+     * @return TRUE if it turned off, FALSE if it didn't (it was already off)
+     */
+    public boolean DisableModule(Module m){
+        if(!m.status){ return false; }
+        m.status = false;
+        m.onDisable();
+        return true;
+    }
+    /**
+     * @return TRUE if it turned on, FALSE if it didn't (it was already on)
+     */
+    public boolean EnableModuleId(String id){
+        return EnableModule(getModule(id));
+    }
+    /**
+     * @return TRUE if it turned off, FALSE if it didn't (it was already off)
+     */
+    public boolean DisableModuleId(String id){
+        return DisableModule(getModule(id));
     }
     public Module getModule(String id){
         for (Module m : modules){

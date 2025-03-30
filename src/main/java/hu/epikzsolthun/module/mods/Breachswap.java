@@ -1,8 +1,6 @@
 package hu.epikzsolthun.module.mods;
 
-import hu.epikzsolthun.CustomModifiers;
 import hu.epikzsolthun.module.Module;
-import net.fabricmc.fabric.api.event.player.AttackEntityCallback;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.entity.Entity;
@@ -36,6 +34,7 @@ public class Breachswap extends Module {
         for (ItemStack armorPiece : ((LivingEntity) e).getArmorItems()) {
             if (!armorPiece.isEmpty()) {
                 hasarmor = true;
+                break;
             }
         }
         if(!hasarmor){
@@ -53,7 +52,6 @@ public class Breachswap extends Module {
         if(!status){ return; }
 
         if(setbackslot != -1){
-            CustomModifiers.LOGGER.info("Set back to slot: "+ setbackslot);
             MinecraftClient.getInstance().player.getInventory().setSelectedSlot(setbackslot);
             setbackslot = -1;
         }

@@ -2,5 +2,10 @@
   "category.custommodifiers": "Custom Modifiers",
 
   "key.custommodifiers.elytrafly": "Elytra Speed",
-  "key.custommodifiers.breachswap": "Breachswap"
+  "key.custommodifiers.breachswap": "Breachswap",
+  "title.custommodifiers.config": "Custom Modifiers Config",
+  "category.custommodifiers.general": "General",
+
+  "tooltip.custommodifiers.elytraflyspeed": "Default Value: 2.0",
+  "option.custommodifiers.elytraflyspeed": "Elytra Fly Speed"
 }

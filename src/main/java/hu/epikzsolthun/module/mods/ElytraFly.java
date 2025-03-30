@@ -7,8 +7,9 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Items;
 import org.lwjgl.glfw.GLFW;
 
-public class ElytraSpeed extends Module {
-    public ElytraSpeed(){
+public class ElytraFly extends Module {
+    public float elytraflyspeed = 2;
+    public ElytraFly(){
         super(GLFW.GLFW_KEY_J, "elytrafly", Items.ELYTRA);
     }
     @Override
@@ -17,10 +18,14 @@ public class ElytraSpeed extends Module {
         if (player != null && player.getPose() == EntityPose.GLIDING) {
             // Increase elytra speed here
             double yaw = Math.toRadians(player.getYaw());
-            double xMotion = -2 * Math.sin(yaw);
-            double zMotion = 2 * Math.cos(yaw);
+            double xMotion = -elytraflyspeed * Math.sin(yaw);
+            double zMotion = elytraflyspeed * Math.cos(yaw);
 
             player.setVelocity(xMotion, player.getVelocity().y, zMotion);
         }
+    }
+    @Override
+    public void UpdateConfig(){
+        elytraflyspeed = config.stuff.elytraflyspeed;
     }
 }
