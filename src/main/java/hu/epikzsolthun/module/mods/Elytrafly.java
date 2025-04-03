@@ -7,10 +7,10 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Items;
 import org.lwjgl.glfw.GLFW;
 
-public class ElytraFly extends Module {
+public class Elytrafly extends Module {
     public float elytraflyspeed = 2;
-    public ElytraFly(){
-        super(GLFW.GLFW_KEY_J, "elytrafly", Items.ELYTRA);
+    public Elytrafly(){
+        super(GLFW.GLFW_KEY_KP_1, "elytrafly", Items.ELYTRA);
     }
     @Override
     public void tick() {

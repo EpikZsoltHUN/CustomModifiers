@@ -3,7 +3,8 @@ package hu.epikzsolthun.module;
 import hu.epikzsolthun.CustomModifiers;
 import hu.epikzsolthun.ModConfig;
 import hu.epikzsolthun.module.mods.Breachswap;
-import hu.epikzsolthun.module.mods.ElytraFly;
+import hu.epikzsolthun.module.mods.Elytrafly;
+import hu.epikzsolthun.module.mods.Stuntslam;
 import me.shedaniel.autoconfig.AutoConfig;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.rendering.v1.*;
@@ -21,8 +22,9 @@ public class ModuleManager {
 
     public ModuleManager() {
         modules = new Module[]{
-                new ElytraFly(),
-                new Breachswap()
+                new Elytrafly(),
+                new Breachswap(),
+                new Stuntslam()
         };
         ClientTickEvents.END_CLIENT_TICK.register(this::tick);
         WorldRenderEvents.LAST.register(this::Worldrender);
@@ -61,6 +63,7 @@ public class ModuleManager {
     }
     public void UpdateConfig(){
         for (Module m : modules) {
+            m.config = AutoConfig.getConfigHolder(ModConfig.class).getConfig();
             m.UpdateConfig();
         }
     }
@@ -70,10 +73,9 @@ public class ModuleManager {
      */
     public boolean EnableModule(Module m){
         if(m.status){ return false; }
-        m.status = true;
-        m.config = AutoConfig.getConfigHolder(ModConfig.class).getConfig();
-        m.UpdateConfig();
+        UpdateConfig();
         m.onEnable();
+        m.status = true;
         return true;
     }
     /**
@@ -81,8 +83,8 @@ public class ModuleManager {
      */
     public boolean DisableModule(Module m){
         if(!m.status){ return false; }
-        m.status = false;
         m.onDisable();
+        m.status = false;
         return true;
     }
     /**

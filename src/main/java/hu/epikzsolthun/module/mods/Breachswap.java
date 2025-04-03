@@ -16,7 +16,7 @@ import static net.minecraft.util.hit.HitResult.Type.ENTITY;
 public class Breachswap extends Module {
     int setbackslot = -1;
     public Breachswap() {
-        super(GLFW.GLFW_KEY_K, "breachswap", Items.MACE);
+        super(GLFW.GLFW_KEY_KP_2, "breachswap", Items.MACE);
     }
     public void beginHitEntity(){
         if(!status){ return; }

@@ -11,7 +11,8 @@
 		"homepage": "https://github.com/apple745/CustomModifiers",
 		"issues": "https://github.com/apple745/CustomModifiers/issues"
 	},
-	"environment": "*",
+	"license": "MIT",
+	"environment": "client",
 	"entrypoints": {
 		"client": [
 			"hu.epikzsolthun.CustomModifiers"

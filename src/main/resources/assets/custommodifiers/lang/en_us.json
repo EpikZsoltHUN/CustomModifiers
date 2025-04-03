@@ -1,8 +1,9 @@
 {
   "category.custommodifiers": "Custom Modifiers",
 
-  "key.custommodifiers.elytrafly": "Elytra Speed",
+  "key.custommodifiers.elytrafly": "Elytrafly",
   "key.custommodifiers.breachswap": "Breachswap",
+  "key.custommodifiers.stuntslam": "Stuntslam",
   "title.custommodifiers.config": "Custom Modifiers Config",
   "category.custommodifiers.general": "General",
 
